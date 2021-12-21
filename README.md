@@ -21,4 +21,4 @@ PRs accepted.
 
 ## License
 
-MIT © Richard McRichface
+HanSungKim
