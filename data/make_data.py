@@ -18,10 +18,10 @@ def get_data(path):
         if speaking[n][0] == 'Marshall':
             # print(speaking[n-1])
             # print(speaking[n])
-            characters.append(speaking[n-1][0])
-            data.append(speaking[n-1])
-            characters.append(speaking[n][0])
-            data.append(speaking[n])
+            characters.append(re.sub('(\(.+?\))', '', speaking[n-1][0]).strip())
+            data.append([re.sub('(\(.+?\))', '', speaking[n-1][0]).strip(), speaking[n-1][1]])
+            characters.append(re.sub('(\(.+?\))', '', speaking[n][0]).strip())
+            data.append([re.sub('(\(.+?\))', '', speaking[n][0]).strip(), speaking[n][1]])
 
     characters = list(set(characters))
 
@@ -56,5 +56,17 @@ for num in range(1, 23):
     characters.append(character)
     data_hall.append(data)
 
-pprint.pprint(characters)
-pprint.pprint(data_hall)
+# pprint.pprint(characters)
+# pprint.pprint(data_hall)
+
+characters = set([name for names in characters for name in names])
+
+data_dict = {}
+for name in characters:
+    data_dict[name] = []
+
+for episode in data_hall:
+    for k, v in episode:
+        data_dict[k].append(v)
+
+print(data_dict)
