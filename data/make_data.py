@@ -28,26 +28,10 @@ def get_data(path):
     return characters, data
 
 
-# 대본은 가져온 후 인물별로 말을 나눠 담는 코드
-    # Marshall, Ranjit, Barney, Lily, Robin, Ted, Narrator, Yasmine = \
-    #     [], [], [], [], [], [], [], []
-    # for row in data:
-    #     if row[0] == 'Marshall':
-    #         Marshall.append(row[1])
-    #     if row[0] == 'Ranjit':
-    #         Ranjit.append(row[1])
-    #     if row[0] == 'Barney':
-    #         Barney.append(row[1])
-    #     if row[0] == 'Lily':
-    #         Lily.append(row[1])
-    #     if row[0] == 'Robin':
-    #         Robin.append(row[1])
-    #     if row[0] == 'Ted':
-    #         Ted.append(row[1])
-    #     if row[0] == 'Narrator':
-    #         Narrator.append(row[1])
-    #     if row[0] == 'Yasmine':
-    #         Yasmine.append(row[1])
+def none_use(data):
+    data = re.sub('', '', data)
+    return data
+
 
 characters, data_hall = [], []
 for num in range(1, 23):
@@ -70,3 +54,7 @@ for episode in data_hall:
         data_dict[k].append(v)
 
 print(data_dict)
+
+# none_use()
+
+# 시즌 1 캐릭터별 데이터 딕셔너리로 저장 까지.
