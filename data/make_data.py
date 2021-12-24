@@ -54,7 +54,7 @@ for episode in data_hall:
         data_dict[k].append(v)
 
 print(data_dict)
-
 # none_use()
+
 
 # 시즌 1 캐릭터별 데이터 딕셔너리로 저장 까지.
