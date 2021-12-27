@@ -29,8 +29,18 @@ def get_data(path):
 
 
 def none_use(data):
-    data = re.sub('', '', data)
-    return data
+    rows = ''
+    for name in data:
+        for row in data[name]:
+            rows += row
+
+    rows = re.sub('[\,\.\?\!\"\(\)]', '', rows)
+    rows = rows.split()
+
+    print(len(rows))                # 17475
+    print(len(set(rows)))           # 3237
+
+    return rows
 
 
 characters, data_hall = [], []
@@ -53,8 +63,8 @@ for episode in data_hall:
     for k, v in episode:
         data_dict[k].append(v)
 
-print(data_dict)
-# none_use()
+# print(data_dict)
+none_use(data_dict)
 
 
 # 시즌 1 캐릭터별 데이터 딕셔너리로 저장 까지.
