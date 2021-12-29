@@ -75,7 +75,7 @@ for i, row in enumerate(rows, 1):
     idx2vocab[i] = row
     vocab2idx[row] = i
 
-# print(idx2vocab)
-# print(vocab2idx)
+print(idx2vocab)
+print(vocab2idx)
 
 # 시즌 1 캐릭터별 데이터 딕셔너리로 저장 까지.
