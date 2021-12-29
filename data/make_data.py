@@ -78,4 +78,4 @@ for i, row in enumerate(rows, 1):
 print(idx2vocab)
 print(vocab2idx)
 
-# 시즌 1 캐릭터별 데이터 딕셔너리로 저장 까지.
+# 보캅 만듬
