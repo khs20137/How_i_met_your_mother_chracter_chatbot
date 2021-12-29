@@ -32,13 +32,15 @@ def none_use(data):
     rows = ''
     for name in data:
         for row in data[name]:
-            rows += row
+            rows += row.lower()
 
     rows = re.sub('[\,\.\?\!\"\(\)]', '', rows)
     rows = rows.split()
 
-    print(len(rows))                # 17475
-    print(len(set(rows)))           # 3237
+    # print(len(rows))                # 17475
+    # print(len(set(rows)))           # 2781
+
+    rows = set(rows)
 
     return rows
 
@@ -63,8 +65,17 @@ for episode in data_hall:
     for k, v in episode:
         data_dict[k].append(v)
 
-# print(data_dict)
-none_use(data_dict)
+print(len(data_dict))
+rows = none_use(data_dict)
+rows = sorted(list(rows))
+# print(len(sorted(rows)))        # 2781
 
+idx2vocab, vocab2idx = {}, {}
+for i, row in enumerate(rows, 1):
+    idx2vocab[i] = row
+    vocab2idx[row] = i
+
+# print(idx2vocab)
+# print(vocab2idx)
 
 # 시즌 1 캐릭터별 데이터 딕셔너리로 저장 까지.
