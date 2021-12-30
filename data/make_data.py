@@ -33,9 +33,8 @@ def make_unique(data):
     rows = ''
     for name in data:
         for row in data[name]:
-            rows += row.lower()
+            rows += ' ' + row
 
-    rows = re.sub('[\,\.\?\!\"\(\)]', '', rows)
     rows = rows.split()
 
     # print(len(rows))                # 17475
@@ -62,16 +61,7 @@ for num in range(1, 23):
     data_hall.append(data)
 
 # pprint.pprint(characters)
-pprint.pprint(data_hall)
-
-exit()
-
-for episode in data_hall:
-    for _, v in episode:
-        v = clean_str(v)
-        print(v)
-
-exit()
+# pprint.pprint(data_hall)
 
 characters = set([name for names in characters for name in names])
 
@@ -81,6 +71,7 @@ for name in characters:
 
 for episode in data_hall:
     for k, v in episode:
+        v = clean_str(v)
         data_dict[k].append(v)
 
 rows = make_unique(data_dict)
@@ -93,13 +84,14 @@ for i, row in enumerate(rows, 1):
     vocab2idx[row] = i
 
 # print(idx2vocab)
-print(vocab2idx)
+# print(vocab2idx)
 
 # exit()
 
 for i in data_hall:
     for j in i:
         speech = clean_str(j[1])
+        # print(speech)
         print(j[0], speech)
         print(j[0], [vocab2idx[word] for word in speech.split()])
 
