@@ -18,8 +18,9 @@ def get_data(path):
         if speaking[n][0] == 'Marshall':
             # print(speaking[n-1])
             # print(speaking[n])
-            characters.append(re.sub('(\(.+?\))', '', speaking[n-1][0]).strip())
-            data.append([re.sub('(\(.+?\))', '', speaking[n-1][0]).strip(), speaking[n-1][1]])
+            if speaking[n-1][0] != 'Marshall':
+                characters.append(re.sub('(\(.+?\))', '', speaking[n-1][0]).strip())
+                data.append([re.sub('(\(.+?\))', '', speaking[n-1][0]).strip(), speaking[n-1][1]])
             characters.append(re.sub('(\(.+?\))', '', speaking[n][0]).strip())
             data.append([re.sub('(\(.+?\))', '', speaking[n][0]).strip(), speaking[n][1]])
 
@@ -44,7 +45,11 @@ def make_unique(data):
 
 
 def clean_str(rows):
-    rows = re.sub('[\,\.\?\!\"\(\)]', '', rows)
+    rows = re.sub('(\(.+?\))', '', rows)
+    rows = re.sub('[\,\.\?\!\"\…\“\”\*]', '', rows)
+    rows = re.sub('-', ' ', rows)
+    rows = re.sub('—', ' ', rows)
+    rows = re.sub('’', '\'', rows)
 
     return rows.lower().strip()
 
@@ -57,7 +62,16 @@ for num in range(1, 23):
     data_hall.append(data)
 
 # pprint.pprint(characters)
-# pprint.pprint(data_hall)
+pprint.pprint(data_hall)
+
+exit()
+
+for episode in data_hall:
+    for _, v in episode:
+        v = clean_str(v)
+        print(v)
+
+exit()
 
 characters = set([name for names in characters for name in names])
 
@@ -79,7 +93,6 @@ for i, row in enumerate(rows, 1):
     vocab2idx[row] = i
 
 # print(idx2vocab)
-print(vocab2idx)
 print(vocab2idx)
 
 # exit()
