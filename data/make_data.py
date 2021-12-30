@@ -28,7 +28,7 @@ def get_data(path):
     return characters, data
 
 
-def none_use(data):
+def make_unique(data):
     rows = ''
     for name in data:
         for row in data[name]:
@@ -40,9 +40,13 @@ def none_use(data):
     # print(len(rows))                # 17475
     # print(len(set(rows)))           # 2781
 
-    rows = set(rows)
+    return set(rows)
 
-    return rows
+
+def clean_str(rows):
+    rows = re.sub('[\,\.\?\!\"\(\)]', '', rows)
+
+    return rows.lower().strip()
 
 
 characters, data_hall = [], []
@@ -65,8 +69,7 @@ for episode in data_hall:
     for k, v in episode:
         data_dict[k].append(v)
 
-print(len(data_dict))
-rows = none_use(data_dict)
+rows = make_unique(data_dict)
 rows = sorted(list(rows))
 # print(len(sorted(rows)))        # 2781
 
@@ -75,7 +78,16 @@ for i, row in enumerate(rows, 1):
     idx2vocab[i] = row
     vocab2idx[row] = i
 
-print(idx2vocab)
+# print(idx2vocab)
 print(vocab2idx)
+print(vocab2idx)
+
+# exit()
+
+for i in data_hall:
+    for j in i:
+        speech = clean_str(j[1])
+        print(j[0], speech)
+        print(j[0], [vocab2idx[word] for word in speech.split()])
 
 # 보캅 만듬
